@@ -28,14 +28,14 @@ export default function Home() {
     "transitionTimingFunction": "ease-out"
   }
 
-  let navbarOpacity = 1 - heroOpacity
-
   const navbarOpacityStyle = {
-    "opacity": navbarOpacity,
+    "opacity": 1 - heroOpacity,
     "transitionProperty": "opacity",
     "transitionDuration": "0.125s",
     "transitionTimingFunction": "ease-out"
   }
+
+  const [mobileNavbarOpen, setMobileNavbarOpen] = useState(false)
 
   return (
     <main className="flex flex-col justify-center items-center w-full h-full min-w-screen min-h-screen bg-zinc-50 scroll-smooth">
@@ -66,7 +66,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex sm:hidden shrink h-32 mb-4">
+          <div className="flex sm:hidden shrink h-24 sm:h-32 mb-4">
             <div className="flex grow-0 h-full">
               <Image
                 className="object-contain w-full h-full text-zinc-50 stroke-zinc-50"
@@ -79,9 +79,11 @@ export default function Home() {
               />
             </div>
           </div>
-          <h2 className="font-display-condensed font-regular text-2xl text-md text-zinc-50 uppercase tracking-[0.25em]">
-            Established 1992
-          </h2>
+          <div className="flex flex-col justify-center items-center">
+            <h2 className="font-sans font-medium text-xs sm:text-xl text-center text-white uppercase tracking-[0.125em] px-8">
+              Taiwanese American Student Club
+            </h2>
+          </div>
         </div>
         <div ref={heroRef} className="absolute z-30 w-screen h-screen object-fit overflow-hidden select-nones" style={heroOpacityStyle}>
           {/* <Parallax className="relative w-screen h-screen" speed={-40}>
@@ -114,23 +116,30 @@ export default function Home() {
       {/* MAIN CONTENT */}
       <section className="flex flex-col w-full justify-center items-center">
         {/* Navbar */}
-        <navbar className="sticky top-0 z-10 flex w-full h-full justify-center items-center h-20 bg-zinc-50" style={navbarOpacityStyle}>
-          <div className="flex flex-row justify-start items-center w-full h-full max-w-screen-xl space-x-8 px-8">
-            <div className="flex justify-start items-center w-full h-full">
-              <div className="h-12">
-                <div className="flex w-full h-full">
-                  <Image
-                    className="object-fit w-full h-full"
-                    src="/media/img/logo_black.png"
-                    alt="TASC Logo"
-                    layout="raw"
-                    width={2896}
-                    height={2798}
-                  />
-                </div>
+        <navbar className="sticky top-0 z-10 flex w-full justify-center items-center h-16 sm:h-20 bg-zinc-50" style={navbarOpacityStyle}>
+          <div className="flex flex-row justify-start items-center w-full h-full max-w-screen-xl space-x-8 px-4">
+            {/* Logo */}
+            <div className="flex grow justify-stretch items-center h-12">
+              <div className="relative flex h-full aspect-square">
+                <Image
+                  src="/media/img/logo_black.svg"
+                  alt="TASC Logo"
+                  layout="fill"
+                  width={100}
+                  height={100}
+                  objectFit="contain"
+                />
               </div>
             </div>
-            <div className="flex flex-grow w-full h-full justify-end items-center space-x-8">
+            {/* Navigation Menu Button */}
+            <div className="flex sm:hidden shrink h-full justify-end items-center">
+              <button type="button" onClick={() => { setMobileNavbarOpen(!mobileNavbarOpen) }}>
+                <FontAwesomeIcon className="text-zinc-900 hover:text-zinc-600 transition-colors duration-200" size={"xl"} icon={solid("bars")} />
+              </button>
+            </div>
+
+            {/* Navigation Menu (screen-sm and larger) */}
+            <div className="hidden sm:flex shrink h-full justify-end items-center space-x-8">
               <Link href="/">
                 <a className="font-display font-bold text-xl text-zinc-900 hover:text-zinc-600 transition-colors duration-200 uppercase">
                   About
@@ -151,7 +160,7 @@ export default function Home() {
         </navbar>
 
         {/* About Us */}
-        <section id="content" className="flex justify-center items-start w-full h-full max-w-screen-lg px-12 md:px-18 py-16 md:py-24 px-8">
+        <section id="content" className="flex justify-center items-start w-full h-full max-w-screen-lg px-8 py-16 md:py-24">
           <AnimationOnScroll animateOnce={true} animateIn="animate__fadeIn">
             <div className="flex flex-col h-full">
               <h1 className="font-display font-bold text-4xl text-zinc-900 uppercase mb-4 sm:mb-8">
@@ -181,18 +190,18 @@ export default function Home() {
         </section>
 
         {/* Board Gallery */}
-        <section className="flex flex-col grow space-y-4 w-full max-w-screen-xl px-8">
-          <div className="flex flex-row w-full h-[18em] lg:h-[24em] space-x-4">
-            <div className="flex grow h-full justify-center items-center bg-gradient-to-r from-red-500 to-red-300">
+        <section className="flex flex-col grow space-y-4 w-full max-w-screen-xl px-4">
+          <div className="flex flex-col grow sm:flex-row sm:h-[18em] lg:h-[24em] space-y-4 sm:space-x-4 sm:space-y-0">
+            <div className="flex grow aspect-[4/3] sm:aspect-auto justify-center items-center bg-gradient-to-r from-red-500 to-red-300">
               <span className="font-display font-bold text-8xl text-zinc-50">1</span>
             </div>
-            <div className="flex w-[18em] lg:w-[24em] h-full justify-center items-center bg-gradient-to-r from-amber-500 to-amber-300">
+            <div className="flex aspect-[4/3] sm:aspect-square justify-center items-center bg-gradient-to-r from-amber-500 to-amber-300">
               <span className="font-display font-bold text-8xl text-zinc-50">2</span>
             </div>
           </div>
         </section>
 
-        <section id="content" className="flex justify-center items-start w-full h-full max-w-screen-lg px-12 md:px-18 py-16 md:py-24">
+        <section id="content" className="flex justify-center items-start w-full h-full max-w-screen-lg px-8 py-16 md:py-24">
           <AnimationOnScroll animateOnce={true} animateIn="animate__fadeIn">
             <div className="flex flex-col h-full">
               <h1 className="font-display font-bold text-4xl text-zinc-900 uppercase mb-4 sm:mb-8">
@@ -215,28 +224,28 @@ export default function Home() {
         </section>
 
         {/* Board Gallery */}
-        <section className="flex flex-col grow space-y-4 w-full max-w-screen-xl px-8">
-          <div className="flex flex-row w-full h-[18em] lg:h-[24em] space-x-4">
-            <div className="flex w-[18em] lg:w-[24em] h-full justify-center items-center bg-gradient-to-r from-red-500 to-red-300">
+        <section className="flex flex-col grow space-y-4 w-full max-w-screen-xl px-4">
+          <div className="flex flex-col grow sm:flex-row sm:h-[18em] lg:h-[24em] space-y-4 sm:space-x-4 sm:space-y-0">
+            <div className="flex grow aspect-[4/3] sm:aspect-auto justify-center items-center bg-gradient-to-r from-red-500 to-red-300">
               <span className="font-display font-bold text-8xl text-zinc-50">1</span>
             </div>
-            <div className="flex grow h-full justify-center items-center bg-gradient-to-r from-amber-500 to-amber-300">
+            <div className="flex aspect-[4/3] sm:aspect-square justify-center items-center bg-gradient-to-r from-amber-500 to-amber-300">
               <span className="font-display font-bold text-8xl text-zinc-50">2</span>
             </div>
           </div>
-          <div className="flex flex-row w-full h-[18em] lg:h-[24em] space-x-4">
-            <div className="flex w-1/2 h-full justify-center items-center bg-gradient-to-r from-green-500 to-green-300">
+          <div className="flex flex-col grow sm:flex-row sm:h-[18em] lg:h-[24em] space-y-4 sm:space-x-4 sm:space-y-0">
+            <div className="flex aspect-[4/3] sm:aspect-square justify-center items-center bg-gradient-to-r from-green-500 to-green-300">
               <span className="font-display font-bold text-8xl text-zinc-50">3</span>
             </div>
-            <div className="flex w-1/2 h-full justify-center items-center bg-gradient-to-r from-blue-500 to-blue-300">
+            <div className="flex grow aspect-[4/3] sm:aspect-auto justify-center items-center bg-gradient-to-r from-blue-500 to-blue-300">
               <span className="font-display font-bold text-8xl text-zinc-50">4</span>
             </div>
           </div>
-          <div className="flex flex-row w-full h-[18em] lg:h-[24em] space-x-4">
-            <div className="flex grow h-full justify-center items-center bg-gradient-to-r from-violet-500 to-violet-300">
+          <div className="flex flex-col grow sm:flex-row sm:h-[18em] lg:h-[24em] space-y-4 sm:space-x-4 sm:space-y-0">
+            <div className="flex grow aspect-[4/3] sm:aspect-auto justify-center items-center bg-gradient-to-r from-purple-500 to-purple-300">
               <span className="font-display font-bold text-8xl text-zinc-50">5</span>
             </div>
-            <div className="flex w-[18em] lg:w-[24em] h-full justify-center items-center bg-gradient-to-r from-fuchsia-500 to-fuchsia-300">
+            <div className="flex aspect-[4/3] sm:aspect-square justify-center items-center bg-gradient-to-r from-rose-500 to-rose-300">
               <span className="font-display font-bold text-8xl text-zinc-50">6</span>
             </div>
           </div>
@@ -244,51 +253,41 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <section className="flex flex-col grow w-full max-w-screen-xl px-8 py-16">
-        <div className="flex flex-row justify-between items-start w-full pt-8 border-t-2 border-zinc-900">
-          <div className="flex flex-row justify-start items-start w-full h-full mb-4 divide-x-2 divide-zinc-900 select-none">
-            <div className="flex flex-row shrink h-12 pr-4 space-x-2">
-              <div className="flex grow-0 h-full">
+      <section className="flex flex-col grow w-full max-w-screen-xl px-4 py-16">
+        <div className="flex flex-col sm:flex-row justify-stretch items-center sm:items-start w-full py-8 border-t-2 border-zinc-900 space-y-4 sm:space-y-0 sm:space-x-8">
+          <div className="flex flex-row grow justify-center sm:justify-start self-stretch h-12 divide-x-2 divide-zinc-900 select-none">
+            <div className="flex aspect-square mr-4">
+              <div className="relative flex w-full h-full">
                 <Image
-                  className="object-contain w-full h-full"
-                  src="/media/img/logo_black.png"
+                  src="/media/img/logo_black.svg"
                   alt="TASC Logo"
-                  layout="raw"
-                  width="2896"
-                  height="2798"
+                  layout="fill"
+                  width={100}
+                  height={100}
+                  object-fit="contain"
                 />
               </div>
             </div>
-            <div className="flex flex-row shrink h-12 pl-4">
-              <div className="flex grow-0 h-full">
+            <div className="flex aspect-[4/1] pl-4">
+              <div className="relative flex w-full h-full">
                 <Image
-                  className="object-contain w-full h-full"
                   src="/media/img/uiuc_wordmark.svg"
                   alt="UIUC Logo and Wordmark"
-                  layout="raw"
-                  width="400"
-                  height="104"
+                  layout="fill"
+                  width={400}
+                  height={100}
+                  object-fit="contain"
                 />
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-end items-end w-full">
-            <h1 className="font-display font-bold text-xl text-zinc-900 uppercase mb-1">
-              Socials
-            </h1>
-            <div className="flex flex-row grow justify-end items-center w-full space-x-4 select-none">
-              <Link
-                href="mailto:tascuiuc@gmail.com"
-              >
-                <a target="_blank">
-                  <FontAwesomeIcon className="text-zinc-900 hover:text-zinc-600 transition-colors duration-200" size={"2xl"} icon={regular("envelope")} />
-                </a>
-              </Link>
+          <div className="flex flex-col justify-start items-start">
+            <div className="flex flex-row grow justify-center sm:justify-start sm:items-start w-full space-x-4 select-none">
               <Link
                 href="https://www.facebook.com/TASCUIUC"
               >
                 <a target="_blank">
-                  <FontAwesomeIcon className="text-zinc-900 hover:text-zinc-600 transition-colors duration-200" size={"2xl"} icon={brands("facebook")} />
+                  <FontAwesomeIcon className="text-zinc-900 hover:text-zinc-600 transition-colors duration-200" size={"lg"} icon={brands("facebook-f")} />
                 </a>
               </Link>
               <Link
@@ -296,15 +295,18 @@ export default function Home() {
                 target="_blank"
               >
                 <a target="_blank">
-                  <FontAwesomeIcon className="text-zinc-900 hover:text-zinc-600 transition-colors duration-200" size={"2xl"} icon={brands("instagram")} />
+                  <FontAwesomeIcon className="text-zinc-900 hover:text-zinc-600 transition-colors duration-200" size={"xl"} icon={brands("instagram")} />
                 </a>
               </Link>
             </div>
           </div>
         </div>
-        <div className="flex grow w-full max-w-screen-xl justify-start">
-          <p className="font-sans font-normal text-lg text-zinc-900">
-            © Taiwanese American Student Club 2022
+        <div className="flex flex-col grow w-full max-w-screen-xl justify-start">
+          <p className="font-sans font-normal text-xs sm:text-sm text-zinc-600">
+            Copyright © 2022 Taiwanese American Student Club
+          </p>
+          <p className="font-sans font-normal text-xs sm:text-sm text-zinc-600">
+            UIUC logo and wordmark are trademarks of the University of Illinois Urbana-Champaign.
           </p>
         </div>
       </section>

@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        "white" : "#ffffff",
+        "black" : "#000000",
+      },
       animation: {
         "bounce-x": "bounce-x-frames 1s infinite",
         "bounce-y": "bounce-y-frames 1s infinite",
@@ -63,11 +67,9 @@ module.exports = {
         }
       },
       fontFamily: {
-        "sans": ["Inter", ...defaultTheme.fontFamily.sans],
-        "display-skyline": ["TitlingGothicFB Skyline", ...defaultTheme.fontFamily.sans],
-        "display-condensed": ["TitlingGothicFB Cond", ...defaultTheme.fontFamily.sans],
-        "display": ["TitlingGothicFB Normal", "Fracktif", ...defaultTheme.fontFamily.sans],
-        "display-wide": ["TitlingGothicFB Wide", "Fracktif", ...defaultTheme.fontFamily.sans],
+        "sans": ["Open Sans", "Inter", ...defaultTheme.fontFamily.sans],
+        "display": ["TitlingGothicFB Normal", ...defaultTheme.fontFamily.sans],
+        "display-wide": ["TitlingGothicFB Wide", ...defaultTheme.fontFamily.sans],
       }
     },
   },
