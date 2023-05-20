@@ -22,13 +22,14 @@
     "animate.css": "^4.1.1",
     "autoprefixer": "^10.4.7",
     "babel-plugin-macros": "^3.1.0",
-    "framer-motion": "^6.3.4",
+    "framer-motion": "^10.12.12",
     "intersection-observer": "^0.12.0",
-    "next": "12.1.6",
+    "next": "13.0.4",
     "postcss": "^8.4.14",
-    "react": "18.1.0",
+    "react": "18.2.0",
     "react-animation-on-scroll": "^5.1.0",
-    "react-dom": "18.1.0",
+    "react-dom": "18.2.0",
+    "react-feather": "^2.0.10",
     "react-scroll": "^1.8.7",
     "react-scroll-parallax": "^3.2.0",
     "react-scroll-percentage": "^4.2.0",
@@ -40,6 +41,6 @@
   },
   "devDependencies": {
     "eslint": "8.16.0",
-    "eslint-config-next": "12.1.6"
+    "eslint-config-next": "13.0.4"
   }
 }

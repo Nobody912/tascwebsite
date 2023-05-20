@@ -1,19 +1,12 @@
-import "../styles/globals.css"
-import * as React from "react";
-import { ParallaxProvider } from "react-scroll-parallax"
-
-async function loadPolyfills() {
-  if (typeof window.IntersectionObserver === "undefined") {
-    await import("intersection-observer")
-  }
-}
+import "../styles/globals.css";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ParallaxProvider>
+    <Layout>
       <Component {...pageProps} />
-    </ParallaxProvider>
+    </Layout>
   );
 }
 
-export default MyApp
+export default MyApp;
