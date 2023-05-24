@@ -1,12 +1,11 @@
 @tailwind base;
 @tailwind components;
 
-@import url("https://rsms.me/inter/inter.css");
 @import "../public/media/font/Roobert/roobert.css";
 
 @layer utilities {
     html {
-      font-feature-settings: "cv01", "cv02", "cv03", "cv04", "cv05", "cv08";
+      font-feature-settings: "cv01", "cv02", "cv03", "cv04", "cv05";
     }
   }
 

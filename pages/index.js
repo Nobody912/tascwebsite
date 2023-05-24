@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Link as ScrollLink } from "react-scroll";
-import { motion } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const textSlide = {
   initial: {
@@ -31,10 +31,29 @@ const textSlide = {
 };
 
 export default function Home() {
+  // Hero Animation
   const heroRef = useRef(null);
+  const [heroScrollData, setHeroScrollData] = useState(0);
+  const heroScrollYProgress = useScroll({
+    target: heroRef,
+    offset: ["end start", "end end"],
+  })?.scrollYProgress;
 
-  // onload calls
-  useEffect(() => {}, []);
+  useMotionValueEvent(heroScrollYProgress, "change", (latest) => {
+    setHeroScrollData(latest);
+  });
+
+  // gallery animations
+  const galleryRef = useRef(null);
+  const [galleryScrollData, setGalleryScrollData] = useState(0);
+  const galleryScrollYProgress = useScroll({
+    target: galleryRef,
+    offset: ["end start", "start, start"],
+  })?.scrollYProgress;
+
+  useMotionValueEvent(galleryScrollYProgress, "change", (latest) => {
+    setGalleryScrollData(latest);
+  });
 
   return (
     <>
@@ -43,7 +62,7 @@ export default function Home() {
         ref={heroRef}
         className="relative flex flex-col justify-center items-center w-full h-[calc(100vh-64px)] overflow-none"
       >
-        {/* Logo and Title */}
+        {/* Logo */}
         <div className="absolute z-40 flex flex-col justify-center items-center">
           <div className="relative w-32 h-32">
             <Image
@@ -55,7 +74,10 @@ export default function Home() {
           </div>
         </div>
         <div className="absolute z-30 w-full h-full select-none">
-          <div className="w-full h-full bg-gradient-to-r from-indigo-300 via-pink-300 to-yellow-300 animate-[gradient-xy_10s_ease_infinite]" />
+          <div
+            className="w-full h-full bg-gradient-to-r from-indigo-300 via-pink-300 to-yellow-300 animate-[gradient-xy_10s_ease_infinite]"
+            style={{ opacity: heroScrollData }}
+          />
         </div>
         <div className="absolute z-40 bottom-8">
           <ScrollLink
@@ -99,33 +121,30 @@ export default function Home() {
                 whileInView="whileInView"
                 viewport={{ once: true }}
               >
-                {[
-                  "We are the Taiwanese American Student Club at UIUC. Since our founding in 1992, our mission has been to build a community that ",
-                  <span key={Math.random()} className="font-semibold">
-                    appreciates
-                  </span>,
-                  " and ",
-                  <span key={Math.random()} className="font-semibold">
-                    celebrates
-                  </span>,
-                  " the diverse experience of Taiwanese American culture.",
-                ].flatMap((part) => {
-                  let content =
-                    typeof part === "string" ? part.split(" ") : [part];
-                  return content.map((word) => {
-                    return (
-                      <motion.span
-                        key={Math.random()}
-                        variants={textSlide}
-                        initial="initial"
-                        whileInView="whileInView"
-                        viewport={{ once: true }}
-                      >
-                        {word}{" "}
-                      </motion.span>
-                    );
-                  });
-                })}
+                We are the Taiwanese American Student Club at UIUC. Since our
+                founding in 1992, our mission has been to build a community that{" "}
+                <motion.span
+                  key={Math.random()}
+                  className="font-bold"
+                  // initial={{ fontWeight: 400 }}
+                  // whileInView={{ fontWeight: 700 }}
+                  // transition={{ ease: "easeInOut", delay: 0.05 }}
+                  // viewport={{ once: true }}
+                >
+                  appreciates
+                </motion.span>{" "}
+                and{" "}
+                <motion.span
+                  key={Math.random()}
+                  className="font-bold"
+                  // initial={{ fontWeight: 400 }}
+                  // whileInView={{ fontWeight: 700 }}
+                  // transition={{ ease: "easeInOut", delay: 0.05 }}
+                  // viewport={{ once: true }}
+                >
+                  celebrates
+                </motion.span>{" "}
+                the diverse experience of Taiwanese American culture.
               </motion.p>
             </motion.div>
           </div>
@@ -134,7 +153,7 @@ export default function Home() {
         {/* Events */}
         <section
           id="events"
-          className="flex flex-col justify-center items-center w-full"
+          className="flex flex-col justify-start items-start w-screen overflow-hidden"
         >
           {/* <div className="flex flex-col">
               <h1 className="font-display font-black text-4xl text-neutral-900 mb-4 uppercase">
@@ -155,16 +174,58 @@ export default function Home() {
                 </Link>
               </div>
             </div> */}
-          <div className="grid grid-cols-3 w-full grow">
-            <div className="relative flex col-span-2 aspect-[2/1]">
+          <div className="flex flex-row grow overflow-scroll">
+            <div className="relative flex aspect-square w-[33vw]">
               <Image
-                className="object-cover w-auto h-full"
+                className="object-cover w-full h-full"
+                src="https://unsplash.com/photos/t55GeRpETn0/download?ixid=MnwxMjA3fDB8MXxhbGx8NDl8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
+                alt="Test"
+                fill
+              />
+            </div>
+            <div className="relative flex aspect-[2/1] w-[66vw]">
+              <Image
+                className="object-cover w-full h-full"
                 src="https://unsplash.com/photos/tUF--C9oOuE/download?ixid=MnwxMjA3fDB8MXxhbGx8MTZ8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
                 alt="Test"
                 fill
               />
             </div>
-            <div className="relative flex col-span-1 aspect-square">
+            <div className="relative flex aspect-square w-[33vw]">
+              <Image
+                className="object-cover w-full h-full"
+                src="https://unsplash.com/photos/Kd2MCCeEhrc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTh8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
+                alt="Test"
+                fill
+              />
+            </div>
+          </div>
+          <div className="flex flex-row grow overflow-scroll" style={{transform: "translateX(-25%)"}}>
+            <div className="relative flex aspect-square w-[33vw]">
+              <Image
+                className="object-cover w-full h-full"
+                src="https://unsplash.com/photos/DX7pT_guAyE/download?ixid=MnwxMjA3fDB8MXxhbGx8NDh8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
+                alt="Test"
+                fill
+              />
+            </div>
+            <div className="relative flex aspect-square w-[33vw]">
+              <Image
+                className="object-cover w-full h-full"
+                src="https://unsplash.com/photos/h2R6C7bVzDc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTd8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
+                alt="Test"
+                fill
+              />
+            </div>
+            <div className="relative flex aspect-square w-[33vw]">
+              <Image
+                className="object-cover w-full h-full"
+                src="https://unsplash.com/photos/Kd2MCCeEhrc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTh8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
+                alt="Test"
+                fill
+              />
+            </div>
+            <div className="relative flex aspect-square w-[33vw]">
               <Image
                 className="object-cover w-auto h-full"
                 src="https://unsplash.com/photos/t55GeRpETn0/download?ixid=MnwxMjA3fDB8MXxhbGx8NDl8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
@@ -172,47 +233,25 @@ export default function Home() {
                 fill
               />
             </div>
-            <div className="relative flex col-span-1 aspect-square">
-              <Image
-                className="object-cover w-auto h-full"
-                src="https://unsplash.com/photos/DX7pT_guAyE/download?ixid=MnwxMjA3fDB8MXxhbGx8NDh8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex col-span-1 aspect-square">
-              <Image
-                className="object-cover w-auto h-full"
-                src="https://unsplash.com/photos/h2R6C7bVzDc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTd8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex col-span-1 aspect-square">
-              <Image
-                className="object-cover w-auto h-full"
-                src="https://unsplash.com/photos/Kd2MCCeEhrc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTh8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex col-span-1 aspect-square">
-              <Image
-                className="object-cover w-auto h-full"
-                src="https://unsplash.com/photos/HE1_K4_-QT8/download?ixid=MnwxMjA3fDB8MXxhbGx8NTh8fHx8fHwyfHwxNjY5MDgzMTM4&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex col-span-2 aspect-[2/1]">
-              <Image
-                className="object-cover w-auto h-full"
-                src="https://unsplash.com/photos/nY14Fs8pxT8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTEzfHx8fHx8Mnx8MTY2OTA4MzMxNA&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
           </div>
+          {/*
+          <div className="relative flex col-span-1 aspect-square">
+            <Image
+              className="object-cover w-auto h-full"
+              src="https://unsplash.com/photos/HE1_K4_-QT8/download?ixid=MnwxMjA3fDB8MXxhbGx8NTh8fHx8fHwyfHwxNjY5MDgzMTM4&force=true"
+              alt="Test"
+              fill
+            />
+          </div>
+          <div className="relative flex col-span-2 aspect-[2/1]">
+            <Image
+              className="object-cover w-auto h-full"
+              src="https://unsplash.com/photos/nY14Fs8pxT8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTEzfHx8fHx8Mnx8MTY2OTA4MzMxNA&force=true"
+              alt="Test"
+              fill
+            />
+          </div>{" "}
+          */}
         </section>
 
         {/* Join/Contact */}
@@ -241,79 +280,43 @@ export default function Home() {
               whileInView="whileInView"
               viewport={{ once: true }}
             >
-              {[
-                "If you are interested in joining or have any inquiries, you can reach us through any of our social accounts or by",
-                <a
-                  key={Math.random()}
-                  className="underline hover:text-neutral-600 transition-colors duration-200"
-                  href="mailto:tasc.uiuc+website@gmail.com"
-                >
-                  {" "}
-                  email
-                </a>,
-                ".",
-              ].flatMap((part) => {
-                let content =
-                  typeof part === "string" ? part.split(" ") : [part];
-                return content.map((word) => {
-                  return (
-                    <motion.span
-                      key={Math.random()}
-                      variants={textSlide}
-                      initial="initial"
-                      whileInView="whileInView"
-                      viewport={{ once: true }}
-                    >
-                      {word}{" "}
-                    </motion.span>
-                  );
-                });
-              })}
+              If you are interested in joining or have any inquiries, you can
+              reach us through any of our social accounts or by{" "}
+              <a
+                key={Math.random()}
+                className="underline hover:text-neutral-600 transition-colors duration-200"
+                href="mailto:tasc.uiuc+website@gmail.com"
+              >
+                email
+              </a>
+              .
             </motion.p>
             <motion.p
               className="font-sans font-normal text-2xl md:text-4xl text-black"
               variants={textSlide}
               initial="initial"
               whileInView="whileInView"
+              viewport={{ once: true }}
             >
-              {[
-                "To stay updated on our events and activities, follow us on",
-                <Link
-                  key={Math.random()}
-                  className="underline hover:text-neutral-600 transition-colors duration-200"
-                  href="https://www.instagram.com/tascuiuc/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Instagram
-                </Link>,
-                "and",
-                <Link
-                  key={Math.random()}
-                  className="underline hover:text-neutral-600 transition-colors duration-200"
-                  href="https://www.facebook.com/tasc.uiuc/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Facebook
-                </Link>,
-                ".",
-              ].flatMap((part) => {
-                let content =
-                  typeof part === "string" ? part.split(" ") : [part];
-                return content.map((word) => {
-                  return (
-                    <motion.span
-                      key={Math.random()}
-                      variants={textSlide}
-                      initial="initial"
-                      whileInView="whileInView"
-                    >
-                      {word}{" "}
-                    </motion.span>
-                  );
-                });
-              })}
+              To stay updated on our events and activities, follow us on{" "}
+              <Link
+                className="underline hover:text-neutral-600 transition-colors duration-200"
+                href="https://www.instagram.com/tascuiuc/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </Link>{" "}
+              and{" "}
+              <Link
+                className="underline hover:text-neutral-600 transition-colors duration-200"
+                href="https://www.facebook.com/tasc.uiuc/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Facebook
+              </Link>
+              .
             </motion.p>
           </motion.div>
         </section>

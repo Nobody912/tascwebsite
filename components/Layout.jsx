@@ -28,11 +28,7 @@ export default function Layout(props) {
     <>
       {/* Navbar */}
       <Head>
-        <title>{`TASC UIUC — ${router.asPath}`}</title>
-        <meta
-          name="description"
-          content="The Taiwanese American Student Club at the University of Illinois at Urbana-Champaign."
-        />
+        <title>{`TASC UIUC — ${routes.find((route) => route.path === router.asPath)?.name}`}</title>
       </Head>
       <Navbar routes={routes} />
       <main className="flex flex-col w-full justify-start items-center overflow-auto">
