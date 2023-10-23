@@ -15,13 +15,13 @@ import * as Icon from "react-feather";
 const MenuItem = ({ route, text, selected }) => (
   <motion.div>
     <Link href={route.path}>
-      <h1 className="text-4xl sm:text-xl text-black font-display font-medium leading-none">
+      <h1 className="text-base md:text-lg text-white leading-6 md:leading-6 select-none">
         {text}
       </h1>
       {selected && (
         <motion.div
-          className="md:border-b md:border-black"
-          layoutId="underline"
+          className="border-b-2 border-white"
+          layoutId="underline-group"
         />
       )}
     </Link>
@@ -34,20 +34,20 @@ export default function Navbar(props) {
   const [mobileNavbarOpen, setMobileNavbarOpen] = useState(false);
   // const scroll = useScroll();
 
-  const { scrollYProgress } = useScroll();
-  const [scrollData, setScrollData] = useState(0);
+  // const { scrollYProgress } = useScroll();
+  // const [scrollData, setScrollData] = useState(0);
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setScrollData(latest);
-  });
+  // useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  //   setScrollData(latest);
+  // });
 
   return (
     <>
-      <motion.nav className="sticky z-50 top-0 left-0 flex w-full justify-center items-center h-16 bg-white">
-        <div
+      <motion.nav className="fixed top-0 z-40 flex w-full justify-center items-center h-16 bg-transparent">
+        {/* <div
           className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-300 via-pink-300 to-yellow-300"
           style={{ transform: `translateX(-${100 - scrollData * 100}%)` }}
-        ></div>
+        ></div> */}
         <div className="relative z-50 flex justify-start items-center w-full h-full max-w-screen-xl space-x-8 px-4">
           {/* Logo */}
           <div className="flex grow justify-start items-center">
@@ -58,14 +58,11 @@ export default function Navbar(props) {
               <div className="relative w-12 h-12">
                 <Image
                   className="object-contain"
-                  src="/media/img/logo_black.png"
+                  src="/media/img/logo_white.png"
                   alt="TASC Logo"
                   fill
                 />
               </div>
-              <span className="text-2xl text-black font-display font-semibold tracking-wide">
-                TASC@UIUC
-              </span>
             </Link>
           </div>
           {/* Navigation Menu Button */}
@@ -77,12 +74,12 @@ export default function Navbar(props) {
                 setMobileNavbarOpen(!mobileNavbarOpen);
               }}
             >
-              <Icon.Menu className="w-6 h-6 text-black" />
+              <Icon.Menu className="w-6 h-6 text-white" />
             </button>
           </div>
 
           {/* Navigation Menu (screen-sm and larger) */}
-          <div className="hidden sm:flex shrink h-full justify-end items-center space-x-8">
+          <div className="flex flex-row space-x-4">
             <AnimatePresence>
               {routes.map((route, index) => {
                 return (
@@ -101,7 +98,7 @@ export default function Navbar(props) {
         <AnimatePresence>
           {mobileNavbarOpen && (
             <motion.div
-              className="absolute top-0 bottom-0 z-40 flex w-full h-screen justify-center items-center bg-white/80 backdrop-blur-md overflow-hidden"
+              className="absolute top-0 bottom-0 z-40 flex w-full h-screen justify-center items-center bg-black/80 backdrop-blur-md overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

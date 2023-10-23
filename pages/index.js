@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import * as Icon from "react-feather";
 
 import { Link as ScrollLink } from "react-scroll";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -48,11 +50,12 @@ export default function Home() {
   const [galleryScrollData, setGalleryScrollData] = useState(0);
   const galleryScrollYProgress = useScroll({
     target: galleryRef,
-    offset: ["end start", "start, start"],
+    offset: ["end start", "start end"],
   })?.scrollYProgress;
 
   useMotionValueEvent(galleryScrollYProgress, "change", (latest) => {
     setGalleryScrollData(latest);
+    console.log("percent", latest);
   });
 
   return (
@@ -60,7 +63,7 @@ export default function Home() {
       {/* Hero Header */}
       <div
         ref={heroRef}
-        className="relative flex flex-col justify-center items-center w-full h-[calc(100vh-64px)] overflow-none"
+        className="relative flex flex-col justify-center items-center w-full h-[calc(100dvh)] overflow-none"
       >
         {/* Logo */}
         <div className="absolute z-40 flex flex-col justify-center items-center">
@@ -84,12 +87,11 @@ export default function Home() {
             spy={true}
             duration={1000}
             to={"home"}
-            offset={-32}
             smooth={"easeInOutQuint"}
           >
             <span className="flex flex-row justify-center items-center">
               <p className="flex font-sans font-normal text-4xl text-white hover:text-white/50 animate-colors animate-bounce-x transition-all ease-in-out duration-200 cursor-pointer">
-                ↓
+                <Icon.ArrowDown />
               </p>
             </span>
           </ScrollLink>
@@ -102,9 +104,9 @@ export default function Home() {
         className="flex flex-col w-full justify-center items-center"
       >
         {/* About Us */}
-        <section className="flex justify-center items-center w-screen h-auto md:h-screen max-w-4xl px-8 py-16 md:py-0">
+        <section className="flex justify-center items-center w-screen h-auto md:h-[70dvh] max-w-4xl px-8 py-16 md:py-0">
           <div className="flex flex-col w-full h-full justify-center items-center">
-            <motion.div variant={textSlide} className="flex flex-col">
+            <motion.div variants={textSlide} className="flex flex-col">
               <motion.h1
                 className="font-display font-bold text-3xl md:text-5xl text-black mb-4 sm:mb-8"
                 variants={textSlide}
@@ -153,7 +155,8 @@ export default function Home() {
         {/* Events */}
         <section
           id="events"
-          className="flex flex-col justify-start items-start w-screen overflow-hidden"
+          ref={galleryRef}
+          className="flex flex-col w-screen overflow-hidden"
         >
           {/* <div className="flex flex-col">
               <h1 className="font-display font-black text-4xl text-neutral-900 mb-4 uppercase">
@@ -174,91 +177,108 @@ export default function Home() {
                 </Link>
               </div>
             </div> */}
-          <div className="flex flex-row grow overflow-scroll">
-            <div className="relative flex aspect-square w-[33vw]">
-              <Image
-                className="object-cover w-full h-full"
-                src="https://unsplash.com/photos/t55GeRpETn0/download?ixid=MnwxMjA3fDB8MXxhbGx8NDl8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
-                alt="Test"
-                fill
-              />
+          <>
+            <div
+              className="flex flex-row h-96"
+              style={{
+                transform: `translateX(${-50 + galleryScrollData * 50}%)`,
+              }}
+            >
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/DSC_1847.jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/DSC_2203.jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/DSC_2325-Enhanced-NR.jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
             </div>
-            <div className="relative flex aspect-[2/1] w-[66vw]">
-              <Image
-                className="object-cover w-full h-full"
-                src="https://unsplash.com/photos/tUF--C9oOuE/download?ixid=MnwxMjA3fDB8MXxhbGx8MTZ8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
-                alt="Test"
-                fill
-              />
+            <div
+              className="flex flex-row h-96"
+              style={{
+                transform: `translateX(${0 + galleryScrollData * -50}%)`,
+              }}
+            >
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/DSC_7065-2(1).jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/DSC_9827(1).jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/DSC_9869(1).jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
             </div>
-            <div className="relative flex aspect-square w-[33vw]">
-              <Image
-                className="object-cover w-full h-full"
-                src="https://unsplash.com/photos/Kd2MCCeEhrc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTh8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
-                alt="Test"
-                fill
-              />
+            <div
+              className="flex flex-row h-96"
+              style={{
+                transform: `translateX(${-50 + galleryScrollData * 50}%)`,
+              }}
+            >
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-auto h-full"
+                  src="/media/img/gallery/IMG_6065.jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-auto h-full"
+                  src="/media/img/gallery/IMG_5992.jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
+              <div className="relative flex shrink-0 w-[50dvw] h-full">
+                <Image
+                  className="object-cover w-full h-full"
+                  src="/media/img/gallery/IMG_5921.jpg"
+                  alt="Test"
+                  fill
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex flex-row grow overflow-scroll" style={{transform: "translateX(-25%)"}}>
-            <div className="relative flex aspect-square w-[33vw]">
-              <Image
-                className="object-cover w-full h-full"
-                src="https://unsplash.com/photos/DX7pT_guAyE/download?ixid=MnwxMjA3fDB8MXxhbGx8NDh8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex aspect-square w-[33vw]">
-              <Image
-                className="object-cover w-full h-full"
-                src="https://unsplash.com/photos/h2R6C7bVzDc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTd8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex aspect-square w-[33vw]">
-              <Image
-                className="object-cover w-full h-full"
-                src="https://unsplash.com/photos/Kd2MCCeEhrc/download?ixid=MnwxMjA3fDB8MXxhbGx8MTh8fHx8fHwyfHwxNjY5MDgwNzkw&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-            <div className="relative flex aspect-square w-[33vw]">
-              <Image
-                className="object-cover w-auto h-full"
-                src="https://unsplash.com/photos/t55GeRpETn0/download?ixid=MnwxMjA3fDB8MXxhbGx8NDl8fHx8fHwyfHwxNjY5MDgzMTM3&force=true"
-                alt="Test"
-                fill
-              />
-            </div>
-          </div>
-          {/*
-          <div className="relative flex col-span-1 aspect-square">
-            <Image
-              className="object-cover w-auto h-full"
-              src="https://unsplash.com/photos/HE1_K4_-QT8/download?ixid=MnwxMjA3fDB8MXxhbGx8NTh8fHx8fHwyfHwxNjY5MDgzMTM4&force=true"
-              alt="Test"
-              fill
-            />
-          </div>
-          <div className="relative flex col-span-2 aspect-[2/1]">
-            <Image
-              className="object-cover w-auto h-full"
-              src="https://unsplash.com/photos/nY14Fs8pxT8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTEzfHx8fHx8Mnx8MTY2OTA4MzMxNA&force=true"
-              alt="Test"
-              fill
-            />
-          </div>{" "}
-          */}
+          </>
+          {/* <>
+            <div className="flex w-full h-screen bg-black"></div>
+          </> */}
         </section>
 
         {/* Join/Contact */}
-        <section
-          id="contact"
-          className="flex justify-center items-start w-full h-full max-w-screen-lg px-8 py-16 md:py-32"
-        >
+        <section className="flex justify-center items-start w-full h-[70dvh] max-w-4xl px-8 py-16 md:py-32">
           <motion.div
             className="flex flex-col h-full gap-y-4"
             variants={textSlide}

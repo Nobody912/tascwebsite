@@ -68,8 +68,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-        display: ["Roobert", ...defaultTheme.fontFamily.sans],
+        sans: ["Mona-Sans", ...defaultTheme.fontFamily.sans],
+        display: ["Mona-Sans", ...defaultTheme.fontFamily.sans],
       },
     },
   },

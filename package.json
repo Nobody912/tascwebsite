@@ -34,6 +34,7 @@
     "react-scroll-parallax": "^3.2.0",
     "react-scroll-percentage": "^4.2.0",
     "react-visibility-sensor": "^5.1.1",
+    "scroller-motion": "^1.2.3",
     "sharp": "^0.30.6",
     "smooth-scrollbar": "^8.7.4",
     "smooth-scrollbar-react": "https://github.com/Nobody912/smooth-scrollbar-react",
