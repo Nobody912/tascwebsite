@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import * as Icon from "react-feather";
+import { ArrowDown, ArrowRight } from "react-feather";
 
 import { Link as ScrollLink } from "react-scroll";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -55,7 +55,6 @@ export default function Home() {
 
   useMotionValueEvent(galleryScrollYProgress, "change", (latest) => {
     setGalleryScrollData(latest);
-    console.log("percent", latest);
   });
 
   return (
@@ -66,7 +65,7 @@ export default function Home() {
         className="relative flex flex-col justify-center items-center w-full h-[calc(100dvh)] overflow-none"
       >
         {/* Logo */}
-        <div className="absolute z-40 flex flex-col justify-center items-center">
+        <div className="absolute z-[35] flex flex-col justify-center items-center">
           <div className="relative w-32 h-32">
             <Image
               src="/media/img/logo_white.png"
@@ -90,8 +89,8 @@ export default function Home() {
             smooth={"easeInOutQuint"}
           >
             <span className="flex flex-row justify-center items-center">
-              <p className="flex font-sans font-normal text-4xl text-white hover:text-white/50 animate-colors animate-bounce-x transition-all ease-in-out duration-200 cursor-pointer">
-                <Icon.ArrowDown />
+              <p className="flex font-normal text-4xl text-white animate-colors animate-bounce-x transition-all ease-in-out duration-200 cursor-pointer opacity-100 hover:opacity-50">
+                <ArrowDown />
               </p>
             </span>
           </ScrollLink>
@@ -104,7 +103,7 @@ export default function Home() {
         className="flex flex-col w-full justify-center items-center"
       >
         {/* About Us */}
-        <section className="flex justify-center items-center w-screen h-auto md:h-[70dvh] max-w-4xl px-8 py-16 md:py-0">
+        <section className="flex justify-center items-center w-screen h-auto max-w-4xl px-8 py-16  md:py-32">
           <div className="flex flex-col w-full h-full justify-center items-center">
             <motion.div variants={textSlide} className="flex flex-col">
               <motion.h1
@@ -117,7 +116,7 @@ export default function Home() {
                 Who are we?
               </motion.h1>
               <motion.p
-                className="font-sans font-normal text-2xl md:text-4xl text-black mb-4 leading-relaxed"
+                className="font-normal text-2xl md:text-4xl text-black mb-4 leading-relaxed"
                 variants={textSlide}
                 initial="initial"
                 whileInView="whileInView"
@@ -125,28 +124,9 @@ export default function Home() {
               >
                 We are the Taiwanese American Student Club at UIUC. Since our
                 founding in 1992, our mission has been to build a community that{" "}
-                <motion.span
-                  key={Math.random()}
-                  className="font-bold"
-                  // initial={{ fontWeight: 400 }}
-                  // whileInView={{ fontWeight: 700 }}
-                  // transition={{ ease: "easeInOut", delay: 0.05 }}
-                  // viewport={{ once: true }}
-                >
-                  appreciates
-                </motion.span>{" "}
-                and{" "}
-                <motion.span
-                  key={Math.random()}
-                  className="font-bold"
-                  // initial={{ fontWeight: 400 }}
-                  // whileInView={{ fontWeight: 700 }}
-                  // transition={{ ease: "easeInOut", delay: 0.05 }}
-                  // viewport={{ once: true }}
-                >
-                  celebrates
-                </motion.span>{" "}
-                the diverse experience of Taiwanese American culture.
+                <span className="font-bold">appreciates</span> and{" "}
+                <span className="font-bold">celebrates</span> the diverse
+                experience of Taiwanese American culture.
               </motion.p>
             </motion.div>
           </div>
@@ -158,25 +138,6 @@ export default function Home() {
           ref={galleryRef}
           className="flex flex-col w-screen overflow-hidden"
         >
-          {/* <div className="flex flex-col">
-              <h1 className="font-display font-black text-4xl text-neutral-900 mb-4 uppercase">
-                Our Events
-              </h1>
-              <p className="font-sans font-regular text-3xl text-neutral-900 mb-4 leading-loose">
-                TASC organizes and hosts a variety of events throughout the
-                year. From our annual Night Market to our Lunar New Year
-                celebration, we strive to provide a space for members to connect
-                with each other and learn about Taiwanese American culture.
-              </p>
-              <div className="flex flex-row w-full">
-                <Link
-                  className="flex shrink font-sans font-medium text-3xl text-neutral-800 hover:text-neutral-600 hover:cursor-pointer transition-colors duration-200 select-none drag-none"
-                  href="/"
-                >
-                  See our events ⟶
-                </Link>
-              </div>
-            </div> */}
           <>
             <div
               className="flex flex-row h-96"
@@ -272,13 +233,10 @@ export default function Home() {
               </div>
             </div>
           </>
-          {/* <>
-            <div className="flex w-full h-screen bg-black"></div>
-          </> */}
         </section>
 
         {/* Join/Contact */}
-        <section className="flex justify-center items-start w-full h-[70dvh] max-w-4xl px-8 py-16 md:py-32">
+        <section className="flex justify-center items-start w-full min-h-[70dvh] max-w-4xl px-8 py-16 md:py-32">
           <motion.div
             className="flex flex-col h-full gap-y-4"
             variants={textSlide}
@@ -293,8 +251,8 @@ export default function Home() {
             >
               Get in touch, stay in touch.
             </motion.h1>
-            <motion.p
-              className="font-sans font-normal text-2xl md:text-4xl text-black"
+            {/* <motion.p
+              className="font-normal text-2xl md:text-4xl text-black"
               variants={textSlide}
               initial="initial"
               whileInView="whileInView"
@@ -303,16 +261,15 @@ export default function Home() {
               If you are interested in joining or have any inquiries, you can
               reach us through any of our social accounts or by{" "}
               <a
-                key={Math.random()}
                 className="underline hover:text-neutral-600 transition-colors duration-200"
                 href="mailto:tasc.uiuc+website@gmail.com"
               >
                 email
               </a>
               .
-            </motion.p>
+            </motion.p> */}
             <motion.p
-              className="font-sans font-normal text-2xl md:text-4xl text-black"
+              className="font-normal text-2xl md:text-4xl text-black"
               variants={textSlide}
               initial="initial"
               whileInView="whileInView"
@@ -326,8 +283,8 @@ export default function Home() {
                 rel="noreferrer"
               >
                 Instagram
-              </Link>{" "}
-              and{" "}
+              </Link>
+              ,{" "}
               <Link
                 className="underline hover:text-neutral-600 transition-colors duration-200"
                 href="https://www.facebook.com/tasc.uiuc/"
@@ -336,8 +293,35 @@ export default function Home() {
               >
                 Facebook
               </Link>
+              , or sign up for our{" "}
+              <Link
+                className="underline hover:text-neutral-600 transition-colors duration-200"
+                href="https://advent.endevre.com/@tasc/interestform"
+                target="_blank"
+                rel="noreferrer"
+              >
+                newsletter
+              </Link>
               .
             </motion.p>
+            <motion.div
+              className="flex flex-row justify-start"
+              variants={textSlide}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+            >
+              <Link
+                className="font-normal text-2xl md:text-4xl hover:text-neutral-600 transition-colors duration-200"
+                href="https://forms.gle/3nh8qRxLGfMYN3ef7"
+                target="_blank"
+              >
+                <span className="inline-flex items-center underline">
+                  Check out the shop{" "}
+                  <ArrowRight className="w-6 h-6 md:w-10 md:h-10" />
+                </span>
+              </Link>
+            </motion.div>
           </motion.div>
         </section>
       </div>
