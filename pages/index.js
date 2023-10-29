@@ -123,7 +123,7 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 We are the Taiwanese American Student Club at UIUC. Since our
-                founding in 1992, our mission has been to build a community that{" "}
+                founding in 1991, our mission has been to build a community that{" "}
                 <span className="font-bold">appreciates</span> and{" "}
                 <span className="font-bold">celebrates</span> the diverse
                 experience of Taiwanese American culture.
