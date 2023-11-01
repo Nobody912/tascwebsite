@@ -29,10 +29,10 @@ export default function Footer(props) {
             </div>
           </div>
           <div className="flex flex-col grow justify-start">
-            <p className="font-sans font-normal text-xs sm:text-sm text-black">
+            <p className="text-xs sm:text-sm text-black">
               © Taiwanese American Student Club 2023
             </p>
-            <p className="font-sans font-normal text-xs sm:text-sm text-black">
+            <p className="text-xs sm:text-sm text-black">
               The UIUC logo and wordmark are trademarks of the University of
               Illinois Urbana-Champaign.
             </p>

@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { Link as ScrollLink } from "react-scroll";
 import { ArrowDown, ArrowRight } from "react-feather";
 
-import { Link as ScrollLink } from "react-scroll";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import Navbar from "../components/Navbar";
 
 const textSlide = {
   initial: {
@@ -89,7 +89,7 @@ export default function Home() {
             smooth={"easeInOutQuint"}
           >
             <span className="flex flex-row justify-center items-center">
-              <p className="flex font-normal text-4xl text-white animate-colors animate-bounce-x transition-all ease-in-out duration-200 cursor-pointer opacity-100 hover:opacity-50">
+              <p className="flex text-4xl text-white animate-colors animate-bounce-x transition-all ease-in-out duration-200 cursor-pointer opacity-100 hover:opacity-50">
                 <ArrowDown />
               </p>
             </span>
@@ -107,7 +107,7 @@ export default function Home() {
           <div className="flex flex-col w-full h-full justify-center items-center">
             <motion.div variants={textSlide} className="flex flex-col">
               <motion.h1
-                className="font-display font-bold text-3xl md:text-5xl text-black mb-4 sm:mb-8"
+                className="font-bold text-3xl md:text-5xl text-black mb-4 sm:mb-8"
                 variants={textSlide}
                 initial="initial"
                 whileInView="whileInView"
@@ -116,7 +116,7 @@ export default function Home() {
                 Who are we?
               </motion.h1>
               <motion.p
-                className="font-normal text-2xl md:text-4xl text-black mb-4 leading-relaxed"
+                className="text-2xl md:text-4xl text-black mb-4 leading-relaxed"
                 variants={textSlide}
                 initial="initial"
                 whileInView="whileInView"
@@ -243,7 +243,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <motion.h1
-              className="font-display font-bold text-3xl md:text-5xl text-black"
+              className="font-bold text-3xl md:text-5xl text-black"
               variants={textSlide}
               initial="initial"
               whileInView="whileInView"
@@ -252,7 +252,7 @@ export default function Home() {
               Get in touch, stay in touch.
             </motion.h1>
             {/* <motion.p
-              className="font-normal text-2xl md:text-4xl text-black"
+              className="text-2xl md:text-4xl text-black"
               variants={textSlide}
               initial="initial"
               whileInView="whileInView"
@@ -269,7 +269,7 @@ export default function Home() {
               .
             </motion.p> */}
             <motion.p
-              className="font-normal text-2xl md:text-4xl text-black"
+              className="text-2xl md:text-4xl text-black"
               variants={textSlide}
               initial="initial"
               whileInView="whileInView"
@@ -312,7 +312,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <Link
-                className="font-normal text-2xl md:text-4xl hover:text-neutral-600 transition-colors duration-200"
+                className="text-2xl md:text-4xl hover:text-neutral-600 transition-colors duration-200"
                 href="https://forms.gle/3nh8qRxLGfMYN3ef7"
                 target="_blank"
               >

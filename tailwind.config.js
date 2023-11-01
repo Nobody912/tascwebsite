@@ -68,8 +68,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Mona-Sans", ...defaultTheme.fontFamily.sans],
-        display: ["Mona-Sans", ...defaultTheme.fontFamily.sans],
+        sans: ["Mona Sans Var", ...defaultTheme.fontFamily.sans],
+        display: ["Mona Sans Var", ...defaultTheme.fontFamily.sans],
       },
     },
   },
