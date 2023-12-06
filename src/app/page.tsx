@@ -7,8 +7,6 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
 import { ArrowDown, ArrowRight } from "react-feather";
 
-import Navbar from "../components/Navbar";
-
 const textSlide = {
   initial: {
     opacity: 0,
@@ -315,8 +313,7 @@ export default function Home() {
             >
               <Link
                 className="text-2xl md:text-4xl hover:text-neutral-600 transition-colors duration-200"
-                href="https://forms.gle/3nh8qRxLGfMYN3ef7"
-                target="_blank"
+                href="/shop"
               >
                 <span className="inline-flex items-center underline">
                   Check out the shop{" "}

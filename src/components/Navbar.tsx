@@ -42,7 +42,8 @@ const MenuItem = ({ url, text, type, selected }: MenuItemProps) => (
       {selected && (
         <motion.div
           className="border-b-2 border-black"
-          layoutId="underline-group"
+          layout
+          layoutId="underline"
         />
       )}
     </Link>
@@ -51,7 +52,7 @@ const MenuItem = ({ url, text, type, selected }: MenuItemProps) => (
 
 export default function Navbar() {
   const pathname = usePathname();
-  
+
   return (
     <>
       <motion.nav className="fixed top-0 z-40 flex w-full justify-center items-center h-16 bg-white/50 backdrop-blur-md">
@@ -76,19 +77,17 @@ export default function Navbar() {
           {/* Navigation Menu (screen-sm and larger) */}
           <div className="flex flex-row space-x-4">
             <AnimatePresence>
-              <AnimatePresence>
-                {routes.map((route, index) => {
-                  return (
-                    <MenuItem
-                      key={index}
-                      url={route}
-                      type={route.type}
-                      text={route.name}
-                      selected={pathname === route.path}
-                    />
-                  );
-                })}
-              </AnimatePresence>
+              {routes.map((route, index) => {
+                return (
+                  <MenuItem
+                    key={index}
+                    url={route}
+                    type={route.type}
+                    text={route.name}
+                    selected={pathname === route.path}
+                  />
+                );
+              })}
             </AnimatePresence>
           </div>
         </div>
