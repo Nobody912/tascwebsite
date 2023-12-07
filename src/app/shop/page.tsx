@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import ProductBrowser from "@/components/Shop";
+// @ts-ignore
+import { ProductBrowser } from "@ecwid/nextjs-ecwid-plugin";
 
 export default function Store() {
   return (
