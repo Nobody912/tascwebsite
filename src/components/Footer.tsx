@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="flex flex-col-reverse md:flex-row justify-between items-end w-full max-w-screen-xl p-4 gap-4">
         <div className="flex flex-col justify-start items-start gap-2">
           <div className="flex flex-col grow justify-start">
-            <p className="text-black">© Taiwanese American Student Club 2023</p>
+            <p className="text-black">© Taiwanese American Student's Club 2023</p>
           </div>
         </div>
         <div className="flex flex-col justify-start items-start md:items-end">

@@ -122,7 +122,7 @@ export default function Home() {
                 whileInView="whileInView"
                 viewport={{ once: true }}
               >
-                We are the Taiwanese American Student Club at UIUC. Since our
+                We are the Taiwanese American Student's Club at UIUC. Since our
                 founding in 1991, our mission has been to build a community that{" "}
                 <span className="font-bold">appreciates</span> and{" "}
                 <span className="font-bold">celebrates</span> the diverse

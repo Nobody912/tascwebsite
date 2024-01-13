@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "TASC | Taiwanese American Student Club at UIUC",
+  title: "TASC | Taiwanese American Student's Club at UIUC",
   description:
-    "The official website of the Taiwanese American Student Club at the University of Illinois at Urbana-Champaign.",
+    "The official website of the Taiwanese American Student's Club at the University of Illinois at Urbana-Champaign.",
 };
 
 export default function RootLayout({
